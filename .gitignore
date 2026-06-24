@@ -2,9 +2,9 @@
 node_modules/
 
 # directorios de compilación / build
-dist/
-build/
-out/
+# dist/
+# build/
+# out/
 
 # variables de entorno
 .env

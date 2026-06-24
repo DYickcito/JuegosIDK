@@ -187,9 +187,7 @@ body {
   display: grid;
   grid-template-rows: repeat(var(--rows, 6), 1fr);
   gap: 6px;
-  width: 100%;
-  max-width: calc(var(--cols, 5) * 38px);
-  aspect-ratio: var(--cols, 5) / var(--rows, 6);
+  width: max-content;
   margin: 0 auto;
 }
 
@@ -200,8 +198,8 @@ body {
 }
 
 .board-tile {
-  width: 100%;
-  aspect-ratio: 1;
+  width: 42px;
+  height: 42px;
   border: 2px solid var(--tile-border);
   background-color: var(--tile-bg-empty);
   color: var(--text-color);
