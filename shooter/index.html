@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shooter 2D - War Style</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <div id="game-container">
+      <canvas id="gameCanvas" width="800" height="600"></canvas>
+      <div id="ui-layer">
+        <div class="health-bar">HP: <span id="hp-val">100</span>%</div>
+        <div class="weapon-info">Arma: <span id="weapon-val">Pistola</span></div>
+        <div class="score-info">Puntos: <span id="score-val">0</span></div>
+      </div>
+      <div id="game-over-screen" class="hidden">
+        <h1>MISIÓN FALLIDA</h1>
+        <button id="restart-btn">Reiniciar Misión</button>
+      </div>
+      <div id="level-complete-screen" class="hidden">
+        <h1>ZONA ASEGURADA</h1>
+        <button id="next-level-btn">Siguiente Zona</button>
+      </div>
+    </div>
+    <script src="./dist/bundle.js"></script>
+  </body>
+</html>

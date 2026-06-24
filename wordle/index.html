@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wordle en Español - Multidificultad</title>
+  <!-- Google Fonts: Outfit for a premium, modern geometric feel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons for modern, clean iconography -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+  <!-- App Container -->
+  <div class="app-container">
+    
+    <!-- Header -->
+    <header class="main-header">
+      <div class="header-top">
+        <button id="help-btn" class="icon-btn" aria-label="Instrucciones">
+          <i data-lucide="help-circle"></i>
+        </button>
+        <h1 class="logo">WORDLE</h1>
+        <div class="header-actions">
+          <button id="hint-btn" class="icon-btn" aria-label="Pista" title="Pedir Pista">
+            <i data-lucide="lightbulb"></i>
+          </button>
+          <button id="stats-btn" class="icon-btn" aria-label="Estadísticas">
+            <i data-lucide="bar-chart-2"></i>
+          </button>
+          <button id="settings-btn" class="icon-btn" aria-label="Ajustes">
+            <i data-lucide="settings"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Difficulty Selector -->
+      <div class="difficulty-selector">
+        <button class="diff-btn" data-diff="4">Fácil <span>4L</span></button>
+        <button class="diff-btn active" data-diff="5">Medio <span>5L</span></button>
+        <button class="diff-btn" data-diff="6">Difícil <span>6L</span></button>
+        <button class="diff-btn" data-diff="7">Experto <span>7L</span></button>
+      </div>
+    </header>
+
+    <!-- Message/Toast System -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Game Board -->
+    <main class="board-container">
+      <div id="game-board" class="game-board" data-length="5">
+        <!-- Rows and cells will be generated via JavaScript -->
+      </div>
+    </main>
+
+    <!-- Virtual Keyboard -->
+    <footer class="keyboard-container">
+      <div id="keyboard" class="keyboard">
+        <!-- Generated via JavaScript for Spanish QWERTY -->
+      </div>
+    </footer>
+  </div>
+
+  <!-- MODAL: HELP / HOW TO PLAY -->
+  <div id="help-modal" class="modal">
+    <div class="modal-content glass">
+      <button class="close-modal">&times;</button>
+      <h2>Cómo Jugar</h2>
+      <p>Adivina la palabra oculta en el número de intentos permitido según la dificultad.</p>
+      <p>Cada intento debe ser una palabra válida. El color de las letras cambia para mostrar qué tan cerca estás:</p>
+      
+      <div class="example-row">
+        <div class="example-tile correct">V</div>
+        <div class="example-tile">E</div>
+        <div class="example-tile">R</div>
+        <div class="example-tile">D</div>
+        <div class="example-tile">E</div>
+        <p><strong>V</strong> está en la palabra y en la posición correcta (Verde).</p>
+      </div>
+      
+      <div class="example-row">
+        <div class="example-tile">C</div>
+        <div class="example-tile">A</div>
+        <div class="example-tile present">S</div>
+        <div class="example-tile">A</div>
+        <p><strong>S</strong> está en la palabra pero en la posición incorrecta (Amarillo).</p>
+      </div>
+      
+      <div class="example-row">
+        <div class="example-tile">L</div>
+        <div class="example-tile">I</div>
+        <div class="example-tile">B</div>
+        <div class="example-tile absent">R</div>
+        <div class="example-tile">O</div>
+        <p><strong>R</strong> no forma parte de la palabra (Gris oscuro).</p>
+      </div>
+
+      <div class="difficulty-info">
+        <h3>Niveles de dificultad:</h3>
+        <ul>
+          <li><strong>Fácil</strong>: 4 letras, 6 intentos. Pista de definición disponible.</li>
+          <li><strong>Medio</strong>: 5 letras, 6 intentos. Sin pistas iniciales.</li>
+          <li><strong>Difícil</strong>: 6 letras, 6 intentos. Las letras correctas/presentes deben ser usadas (Modo Estricto).</li>
+          <li><strong>Experto</strong>: 7 letras, 5 intentos. Modo Estricto y sin pistas.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: STATISTICS -->
+  <div id="stats-modal" class="modal">
+    <div class="modal-content glass">
+      <button class="close-modal">&times;</button>
+      <h2>Estadísticas</h2>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span id="stat-played" class="stat-number">0</span>
+          <span class="stat-label">Jugadas</span>
+        </div>
+        <div class="stat-box">
+          <span id="stat-winpercent" class="stat-number">0%</span>
+          <span class="stat-label">Victorias</span>
+        </div>
+        <div class="stat-box">
+          <span id="stat-streak" class="stat-number">0</span>
+          <span class="stat-label">Racha Act.</span>
+        </div>
+        <div class="stat-box">
+          <span id="stat-maxstreak" class="stat-number">0</span>
+          <span class="stat-label">Racha Máx.</span>
+        </div>
+      </div>
+
+      <h3>Distribución de Intentos</h3>
+      <div id="guess-distribution" class="guess-distribution">
+        <!-- Bars will be generated via JavaScript -->
+      </div>
+
+      <div class="modal-actions">
+        <button id="reset-stats-btn" class="danger-btn">Restablecer Stats</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: SETTINGS -->
+  <div id="settings-modal" class="modal">
+    <div class="modal-content glass">
+      <button class="close-modal">&times;</button>
+      <h2>Ajustes</h2>
+      
+      <div class="settings-list">
+        <div class="setting-item">
+          <div class="setting-text">
+            <h3>Modo Alto Contraste</h3>
+            <p>Colores aptos para daltonismo</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="contrast-toggle">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+
+        <div class="setting-item">
+          <div class="setting-text">
+            <h3>Validar Diccionario</h3>
+            <p>Exige que la palabra introducida exista</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="dictionary-toggle" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: GAME OVER (WIN/LOSE) -->
+  <div id="gameover-modal" class="modal">
+    <div class="modal-content glass gameover-content">
+      <h2 id="gameover-title">¡Has ganado!</h2>
+      <div id="gameover-animation-anchor"></div>
+      
+      <p class="word-reveal">La palabra era: <strong id="revealed-word">CASA</strong></p>
+      
+      <div id="word-definition-box" class="definition-box">
+        <h4>Definición:</h4>
+        <p id="word-clue">Edificio para habitar.</p>
+      </div>
+
+      <div class="gameover-stats">
+        <div id="gameover-attempts">Intentos: 4/6</div>
+      </div>
+
+      <div class="gameover-actions">
+        <button id="share-btn" class="share-btn">
+          <i data-lucide="share-2"></i> Compartir
+        </button>
+        <button id="play-again-btn" class="action-btn">
+          <i data-lucide="rotate-ccw"></i> Jugar de Nuevo
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Scripts -->
+  <script src="words.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Minesweeper</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="game-header">
+            <h1>Minesweeper</h1>
+            <div class="controls">
+                <label for="difficulty">Dificultad:</label>
+                <select id="difficulty">
+                    <option value="easy">Fácil (8x8)</option>
+                    <option value="medium">Medio (10x10)</option>
+                    <option value="hard">Difícil (12x12)</option>
+                </select>
+                <button id="restart-btn" class="btn">Reiniciar</button>
+            </div>
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="icon">🚩</span>
+                    <span id="flag-count">000</span>
+                </div>
+                <div class="stat-box">
+                    <span class="icon">⏱️</span>
+                    <span id="timer">000</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="game-board-container">
+            <div id="game-board" class="game-board"></div>
+            <div id="game-over-modal" class="modal hidden">
+                <h2 id="modal-title">Game Over!</h2>
+                <p id="modal-message">Pisaste una mina.</p>
+                <button id="modal-restart-btn" class="btn primary-btn">Jugar de nuevo</button>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

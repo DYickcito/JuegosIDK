@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade Hub - Selecciona un Juego</title>
+    <meta name="description" content="Hub principal para seleccionar y jugar diferentes juegos clásicos.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-animation"></div>
+    <main class="container">
+        <header>
+            <h1 class="title">Arcade <span>Hub</span></h1>
+            <p class="subtitle">Elige un juego y comienza la aventura</p>
+        </header>
+
+        <div class="games-grid">
+            <!-- Buscaminas -->
+            <a href="buscaminas/index.html" class="game-card">
+                <div class="card-content">
+                    <div class="icon-container buscaminas-icon">
+                        💣
+                    </div>
+                    <h2>Buscaminas</h2>
+                    <p>El clásico juego de estrategia y lógica. Encuentra las minas sin explotar ninguna.</p>
+                    <button class="play-btn">Jugar Ahora</button>
+                </div>
+            </a>
+
+            <!-- Shooter -->
+            <a href="shooter/index.html" class="game-card">
+                <div class="card-content">
+                    <div class="icon-container shooter-icon">
+                        🚀
+                    </div>
+                    <h2>Shooter</h2>
+                    <p>Acción espacial rápida. Destruye enemigos y sobrevive el mayor tiempo posible.</p>
+                    <button class="play-btn">Jugar Ahora</button>
+                </div>
+            </a>
+
+            <!-- Wordle -->
+            <a href="wordle/index.html" class="game-card">
+                <div class="card-content">
+                    <div class="icon-container wordle-icon">
+                        📝
+                    </div>
+                    <h2>Wordle</h2>
+                    <p>Adivina la palabra oculta. Un desafío diario para tu vocabulario y mente.</p>
+                    <button class="play-btn">Jugar Ahora</button>
+                </div>
+            </a>
+        </div>
+    </main>
+</body>
+</html>
