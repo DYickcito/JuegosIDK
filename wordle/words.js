@@ -36,7 +36,6 @@ const WORDS = {
     { word: "PERRO", clue: "Animal doméstico de la familia de los caninos, el mejor amigo del hombre." },
     { word: "LIBRO", clue: "Conjunto de hojas de papel impresas y encuadernadas que forman un volumen." },
     { word: "PLAYA", clue: "Ribera del mar, de un río o de un lago grande formada de arena." },
-    { word: "TIERRA", clue: "El tercer planeta del sistema solar o el suelo que pisamos." },
     { word: "ARBOL", clue: "Planta de tronco leñoso, grueso y elevado que se ramifica a cierta altura." },
     { word: "VERDE", clue: "Color característico de la hierba fresca o de las hojas de los árboles." },
     { word: "VIAJE", clue: "Acción de trasladarse de un lugar a otro, generalmente distante." },
@@ -62,10 +61,12 @@ const WORDS = {
     { word: "VALLE", clue: "Terreno llano de nivel más bajo que el que lo rodea, situado entre montañas." },
     { word: "VISTA", clue: "Sentido corporal que nos permite percibir la luz, formas y colores." },
     { word: "CANTO", clue: "Arte o acción de producir con la voz sonidos melodiosos." },
+    { word: "MUJER", clue: "Ser humano de sexo femenino que ha llegado a la edad adulta." },
     { word: "PADRE", clue: "Varón que ha engendrado uno o más hijos." }
   ],
   6: [
     { word: "MAÑANA", clue: "Parte del día que transcurre desde el amanecer hasta el mediodía." },
+    { word: "TIERRA", clue: "El tercer planeta del sistema solar o el suelo que pisamos." },
     { word: "VERANO", clue: "Estación del año que sigue a la primavera y es la más cálida." },
     { word: "MUSICA", clue: "Arte de combinar los sonidos de la voz o de los instrumentos." },
     { word: "COMIDA", clue: "Sustancia alimenticia que se toma para subsistir o nutrirse." },
@@ -92,7 +93,8 @@ const WORDS = {
     { word: "DIBUJO", clue: "Imagen obtenida trazando líneas sobre una superficie con un lápiz o pincel." },
     { word: "FRUTAL", clue: "Perteneciente al fruto o árbol que produce fruta comestible." },
     { word: "HOMBRE", clue: "Ser humano de sexo masculino que ha llegado a la edad adulta." },
-    { word: "MUJER", clue: "Ser humano de sexo femenino que ha llegado a la edad adulta." },
+    { word: "PASAJE", clue: "Billete de viaje o fragmento de un texto o camino." },
+    { word: "TEMPLO", clue: "Edificio público dedicado al culto religioso." },
     { word: "NOVELA", clue: "Obra literaria escrita en prosa que narra una acción fingida en todo o en parte." },
     { word: "PUEBLO", clue: "Población pequeña, menor que una ciudad, o conjunto de habitantes de un país." }
   ],
@@ -140,9 +142,7 @@ const WORDS = {
     { word: "FESTIVO", clue: "Día de fiesta, alegre o relativo a la diversión." },
     { word: "CUIDADO", clue: "Atención, precaución o asistencia prestada a alguien o algo." },
     { word: "ESPACIO", clue: "Extensión que contiene la materia existente o distancia entre objetos." },
-    { word: "TEMPLO", clue: "Edificio público dedicado al culto religioso." },
     { word: "SONRISA", clue: "Gesto que muestra alegría, satisfacción o afecto sin hacer ruido." },
-    { word: "PASAJE", clue: "Billete de viaje o fragmento de un texto o camino." },
     { word: "TRAFICO", clue: "Circulación de vehículos o comercio de mercancías." },
     { word: "NOTICIA", clue: "Información o conocimiento sobre un hecho reciente y de interés." }
   ]
