@@ -8,6 +8,7 @@
     --buscaminas-color: #ef4444;
     --shooter-color: #8b5cf6;
     --wordle-color: #10b981;
+    --race3d-color: #f59e0b;
 }
 
 * {
@@ -117,6 +118,7 @@ header {
 .game-card[href*="buscaminas"]::before { background: var(--buscaminas-color); }
 .game-card[href*="shooter"]::before { background: var(--shooter-color); }
 .game-card[href*="wordle"]::before { background: var(--wordle-color); }
+.game-card[href*="race3D"]::before { background: var(--race3d-color); }
 
 .game-card:hover {
     transform: translateY(-10px);
@@ -148,6 +150,7 @@ header {
 .buscaminas-icon { color: var(--buscaminas-color); box-shadow: 0 0 20px rgba(239, 68, 68, 0.2); }
 .shooter-icon { color: var(--shooter-color); box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
 .wordle-icon { color: var(--wordle-color); box-shadow: 0 0 20px rgba(16, 185, 129, 0.2); }
+.race3d-icon { color: var(--race3d-color); box-shadow: 0 0 20px rgba(245, 158, 11, 0.2); }
 
 .card-content h2 {
     font-size: 1.75rem;
@@ -199,6 +202,12 @@ header {
     background: var(--wordle-color);
     border-color: var(--wordle-color);
     box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+}
+
+.game-card[href*="race3D"]:hover .play-btn {
+    background: var(--race3d-color);
+    border-color: var(--race3d-color);
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
 }
 
 /* Responsive */

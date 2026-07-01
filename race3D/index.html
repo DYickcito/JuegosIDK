@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberKart 3D - Three.js Racing</title>
+  <!-- Google Fonts para estilo retro-futurista -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+  <!-- Contenedor del Canvas 3D -->
+  <div id="game-canvas-container"></div>
+
+  <!-- PANTALLA DE INICIO (Title Screen) -->
+  <div id="start-screen" class="overlay active">
+    <div class="glass-panel main-menu">
+      <h1 class="neon-text">CYBERKART 3D</h1>
+      <p class="subtitle">A Three.js Arcade Racing Experience</p>
+
+      <div class="selection-container">
+        <h3>SELECCIONA TU VEHÍCULO</h3>
+        <div class="kart-options">
+          <button class="kart-btn active" data-color="#ff007f" style="--accent: #ff007f;">
+            <span class="color-preview" style="background-color: #ff007f;"></span>
+            NEÓN ROSA
+          </button>
+          <button class="kart-btn" data-color="#00f0ff" style="--accent: #00f0ff;">
+            <span class="color-preview" style="background-color: #00f0ff;"></span>
+            CYBER CIAN
+          </button>
+          <button class="kart-btn" data-color="#ffb700" style="--accent: #ffb700;">
+            <span class="color-preview" style="background-color: #ffb700;"></span>
+            ORO AMARILLO
+          </button>
+          <button class="kart-btn" data-color="#39ff14" style="--accent: #39ff14;">
+            <span class="color-preview" style="background-color: #39ff14;"></span>
+            ÁCIDO VERDE
+          </button>
+        </div>
+      </div>
+
+      <div class="selection-container">
+        <h3>CANTIDAD DE VUELTAS</h3>
+        <div class="lap-options">
+          <button class="lap-btn" data-laps="1">1 VUELTA</button>
+          <button class="lap-btn" data-laps="2">2 VUELTAS</button>
+          <button class="lap-btn active" data-laps="3">3 VUELTAS</button>
+          <button class="lap-btn" data-laps="5">5 VUELTAS</button>
+          <button class="lap-btn" data-laps="7">7 VUELTAS</button>
+          <button class="lap-btn" data-laps="10">10 VUELTAS</button>
+        </div>
+      </div>
+
+      <div class="controls-info">
+        <h3>CONTROLES</h3>
+        <div class="control-grid">
+          <div><kbd>▲</kbd> / <kbd>W</kbd> <span>Acelerar</span></div>
+          <div><kbd>▼</kbd> / <kbd>S</kbd> <span>Frenar / Reversa</span></div>
+          <div><kbd>◀</kbd> <kbd>▶</kbd> / <kbd>A</kbd> <kbd>D</kbd> <span>Girar</span></div>
+          <div><kbd>Espacio</kbd> / <kbd>Shift</kbd> <span>Derrapar (Drift)</span></div>
+          <div><kbd>Enter</kbd> <span>Usar Objeto</span></div>
+          <div><kbd>Esc</kbd> / <kbd>P</kbd> <span>Pausar Juego</span></div>
+        </div>
+      </div>
+
+      <button id="start-btn" class="glow-btn">INICIAR CARRERA</button>
+    </div>
+  </div>
+
+  <!-- HUD DE LA CARRERA (Race HUD) -->
+  <div id="hud" class="overlay">
+    <!-- Indicador de Posición (1º, 2º, etc.) -->
+    <div id="position-indicator" class="hud-panel glass-panel">
+      <span class="rank">4</span>
+      <span class="suffix">º</span>
+      <span class="label">POS</span>
+    </div>
+
+    <!-- Caja de Objeto (Item Slot) -->
+    <div id="item-container" class="hud-panel glass-panel">
+      <div id="item-slot">
+        <div id="item-icon" class="empty"></div>
+      </div>
+      <div class="use-tip">ENTER para usar</div>
+    </div>
+
+    <!-- Contador de Vueltas y Tiempo -->
+    <div id="stats-container" class="hud-panel glass-panel">
+      <div class="stat-row">
+        <span class="stat-label">VUELTA:</span>
+        <span id="lap-counter" class="stat-val">1/3</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">TIEMPO:</span>
+        <span id="timer" class="stat-val">00:00.00</span>
+      </div>
+    </div>
+
+    <!-- Indicador de Boost/Turbo por Derrape -->
+    <div id="drift-indicator" class="hud-panel glass-panel">
+      <div class="boost-bar-bg">
+        <div id="boost-bar-fill"></div>
+      </div>
+      <span class="boost-label">DRIFT BOOST</span>
+    </div>
+
+    <!-- Minimapa y Velocímetro -->
+    <div id="minimap-container" class="hud-panel glass-panel">
+      <canvas id="minimap-canvas" width="150" height="150"></canvas>
+      <div id="speedometer">
+        <span id="speed-val">0</span>
+        <span class="speed-unit">KM/H</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANTALLA DE PAUSA (Pause Screen) -->
+  <div id="pause-screen" class="overlay">
+    <div class="glass-panel main-menu">
+      <h1 class="neon-text" style="text-shadow: 0 0 10px #fff, 0 0 20px #ffaa00, 0 0 30px #ffaa00;">CARRERA EN PAUSA</h1>
+      <p class="subtitle">Presiona ESC o P para reanudar</p>
+      
+      <button id="resume-btn" class="glow-btn">REANUDAR</button>
+      <button id="exit-btn" class="glow-btn" style="background: linear-gradient(135deg, #ff8c00, #ff3c00); box-shadow: 0 0 20px rgba(255, 60, 0, 0.4);">SALIR AL MENÚ</button>
+    </div>
+  </div>
+
+  <!-- PANTALLA FINAL (Game Over / Victory) -->
+  <div id="end-screen" class="overlay">
+    <div class="glass-panel main-menu">
+      <h1 id="end-title" class="neon-text">¡VICTORIA!</h1>
+      <p id="end-subtitle">Has completado la carrera</p>
+
+      <div class="results-panel">
+        <div class="result-row">
+          <span>Posición Final:</span>
+          <span id="final-pos" class="val">1º</span>
+        </div>
+        <div class="result-row">
+          <span>Tiempo Total:</span>
+          <span id="final-time" class="val">02:15.42</span>
+        </div>
+        <div class="result-row">
+          <span>Mejor Vuelta:</span>
+          <span id="best-lap" class="val">00:43.10</span>
+        </div>
+      </div>
+
+      <button id="restart-btn" class="glow-btn">JUGAR DE NUEVO</button>
+    </div>
+  </div>
+
+  <!-- Efectos de velocidad en pantalla (Speed Lines) -->
+  <div id="speed-lines"></div>
+
+  <!-- Script principal del juego -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
